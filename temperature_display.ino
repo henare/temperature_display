@@ -1,3 +1,5 @@
+#include "font.h"
+
 #include "SSD1306Spi.h"
 // Initialize the OLED display using SPI
 // D5 -> CLK (Display D0)
@@ -30,7 +32,7 @@ void loop() {
   display.setTextAlignment(TEXT_ALIGN_CENTER);
   display.setFont(ArialMT_Plain_16);
   display.drawString(64, 0, "Inside");
-  display.setFont(ArialMT_Plain_24);
+  display.setFont(Roboto_Bold_40);
   display.drawString(64, 16, insideTemperature());
   display.display();
 
