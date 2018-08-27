@@ -26,9 +26,6 @@ void setup() {
 }
 
 void loop() {
-  // Run every 10 seconds
-  delay(10000);
-
   // Output display
   display.clear();
 
@@ -39,6 +36,9 @@ void loop() {
   display.drawString(64, 16, insideTemperature());
 
   display.display();
+
+  // Refresh every 10 seconds
+  delay(10000);
 }
 
 String insideTemperature() {
