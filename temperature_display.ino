@@ -32,6 +32,11 @@ void loop() {
   float outsideTemperature = -2.2;
 
   display.clear();
+  if (insideTemperature > outsideTemperature) {
+    display.invertDisplay();
+  } else {
+    display.normalDisplay();
+  }
   display.setTextAlignment(TEXT_ALIGN_CENTER);
   display.setFont(ArialMT_Plain_16);
   display.drawString(64, 0, "Inside");
@@ -42,6 +47,11 @@ void loop() {
   delay(5000);
 
   display.clear();
+  if (outsideTemperature > insideTemperature) {
+    display.invertDisplay();
+  } else {
+    display.normalDisplay();
+  }
   display.setTextAlignment(TEXT_ALIGN_CENTER);
   display.setFont(ArialMT_Plain_16);
   display.drawString(64, 0, "Outside");
