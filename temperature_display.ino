@@ -26,15 +26,12 @@ void setup() {
 }
 
 void loop() {
-  // Output display
   display.clear();
-
   display.setTextAlignment(TEXT_ALIGN_CENTER);
   display.setFont(ArialMT_Plain_16);
   display.drawString(64, 0, "Inside");
   display.setFont(ArialMT_Plain_24);
   display.drawString(64, 16, insideTemperature());
-
   display.display();
 
   // Refresh every 10 seconds
