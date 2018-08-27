@@ -29,14 +29,6 @@ void loop() {
   // Run every 10 seconds
   delay(10000);
 
-  // Get temperature
-  float temperature = dht.readTemperature();
-  // Checks for failure and retries
-  if (isnan(temperature)) {
-    Serial.println("Failed to read temperature.");
-    return;
-  }
-
   // Output display
   display.clear();
 
@@ -44,9 +36,20 @@ void loop() {
   display.setFont(ArialMT_Plain_16);
   display.drawString(64, 0, "Inside");
   display.setFont(ArialMT_Plain_24);
-  display.drawString(64, 16, Float2String(temperature, 1) + "°");
+  display.drawString(64, 16, insideTemperature());
 
   display.display();
+}
+
+String insideTemperature() {
+  float temperature = dht.readTemperature();
+  // Checks for failure and retries
+  if (isnan(temperature)) {
+    Serial.println("Failed to read temperature.");
+    return "-";
+  } else {
+    return Float2String(temperature, 1) + "°";
+  }
 }
 
 /*****************************************************************
