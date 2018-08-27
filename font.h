@@ -1,6 +1,6 @@
 // Created by http://oleddisplay.squix.ch/ Consider a donation
 // In case of problems make sure that you are using the font file with the correct version!
-const char Roboto_Bold_40[] PROGMEM = {
+const uint8_t Roboto_Bold_40[] PROGMEM = {
   0x26, // Width: 38
   0x30, // Height: 48
   0x20, // First Char: 32
