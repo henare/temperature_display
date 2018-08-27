@@ -1,0 +1,2 @@
+const char* ssid = "My WiFi Network";
+const char* password = "yourwifipassword";

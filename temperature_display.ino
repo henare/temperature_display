@@ -14,10 +14,23 @@ SSD1306Spi        display(D0, D2, D8);
 #define DHTTYPE DHT22
 DHT dht(DHTPIN, DHTTYPE);
 
+#include <ESP8266WiFi.h>
+#include "wifi_settings.h"
+
 void setup() {
   Serial.begin(9600);
-  Serial.println("Starting setup...");
-  Serial.println();
+
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
 
   dht.begin();
 
