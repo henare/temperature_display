@@ -28,23 +28,33 @@ void setup() {
 }
 
 void loop() {
+  float insideTemperature = dht.readTemperature();
+  float outsideTemperature = -2.2;
+
   display.clear();
   display.setTextAlignment(TEXT_ALIGN_CENTER);
   display.setFont(ArialMT_Plain_16);
   display.drawString(64, 0, "Inside");
   display.setFont(Roboto_Bold_40);
-  display.drawString(64, 16, insideTemperature());
+  display.drawString(64, 16, displayTemperature(insideTemperature));
+  display.display();
+
+  delay(5000);
+
+  display.clear();
+  display.setTextAlignment(TEXT_ALIGN_CENTER);
+  display.setFont(ArialMT_Plain_16);
+  display.drawString(64, 0, "Outside");
+  display.setFont(Roboto_Bold_40);
+  display.drawString(64, 16, displayTemperature(outsideTemperature));
   display.display();
 
   // Refresh every 10 seconds
-  delay(10000);
+  delay(5000);
 }
 
-String insideTemperature() {
-  float temperature = dht.readTemperature();
-  // Checks for failure and retries
+String displayTemperature(float temperature) {
   if (isnan(temperature)) {
-    Serial.println("Failed to read temperature.");
     return "-";
   } else {
     return Float2String(temperature, 1) + "°";
