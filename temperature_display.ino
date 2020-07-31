@@ -69,15 +69,21 @@ void loop() {
 
   float insideTemperature = dht.readTemperature();
 
-  display.clear();
+  String insideLabel;
+  String outsideLabel;
   if (insideTemperature > outsideTemperature) {
-    display.invertDisplay();
+    insideLabel = "Inside - Hotter";
+    outsideLabel = "Outside - Cooler";
   } else {
-    display.normalDisplay();
+    insideLabel = "Inside - Cooler";
+    outsideLabel = "Outside - Hotter";
   }
-  display.setTextAlignment(TEXT_ALIGN_CENTER);
+
+  display.clear();
+  display.setTextAlignment(TEXT_ALIGN_LEFT);
   display.setFont(ArialMT_Plain_16);
-  display.drawString(64, 0, "Inside");
+  display.drawString(0, 0, insideLabel);
+  display.setTextAlignment(TEXT_ALIGN_CENTER);
   display.setFont(Roboto_Bold_40);
   display.drawString(64, 16, displayTemperature(insideTemperature));
   display.display();
@@ -85,14 +91,10 @@ void loop() {
   delay(5000);
 
   display.clear();
-  if (outsideTemperature > insideTemperature) {
-    display.invertDisplay();
-  } else {
-    display.normalDisplay();
-  }
-  display.setTextAlignment(TEXT_ALIGN_CENTER);
+  display.setTextAlignment(TEXT_ALIGN_LEFT);
   display.setFont(ArialMT_Plain_16);
-  display.drawString(64, 0, "Outside");
+  display.drawString(0, 0, outsideLabel);
+  display.setTextAlignment(TEXT_ALIGN_CENTER);
   display.setFont(Roboto_Bold_40);
   display.drawString(64, 16, displayTemperature(outsideTemperature));
   display.display();
