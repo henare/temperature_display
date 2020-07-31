@@ -15,7 +15,9 @@ SSD1306Spi        display(D0, D2, D8);
 DHT dht(DHTPIN, DHTTYPE);
 
 #include <ESP8266WiFi.h>
-#include "wifi_settings.h"
+#include <ESP8266HTTPClient.h>
+#include <ArduinoJson.h>
+#include "settings.h"
 
 void setup() {
   Serial.begin(9600);
@@ -34,15 +36,38 @@ void setup() {
 
   dht.begin();
 
+  Serial.println("Init display");
+
   // Initialising the UI will init the display too.
   display.init();
   // Displays the yellow bar on the top
   display.flipScreenVertically();
+
+  Serial.println("Setup complete");
 }
 
 void loop() {
+  Serial.println("Start loop");
+
+  HTTPClient http;
+
+  // Send request
+  http.useHTTP10(true);
+  http.begin(feinstaubsensor);
+  http.GET();
+
+  // Parse response
+  DynamicJsonDocument doc(2048);
+  deserializeJson(doc, http.getStream());
+
+  // Read values
+  float outsideTemperature = doc["sensordatavalues"][2]["value"].as<String>().toFloat();
+  Serial.println(outsideTemperature);
+
+  // Disconnect
+  http.end();
+
   float insideTemperature = dht.readTemperature();
-  float outsideTemperature = -2.2;
 
   display.clear();
   if (insideTemperature > outsideTemperature) {

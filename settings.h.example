@@ -1,2 +1,3 @@
 const char* ssid = "My WiFi Network";
 const char* password = "yourwifipassword";
+const char* feinstaubsensor = "http://feinstaubsensor-123456.local/data.json";
